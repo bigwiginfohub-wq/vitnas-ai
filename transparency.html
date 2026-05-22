@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transparency — Vitnas AI</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><rect x='6' y='6' width='32' height='32' rx='2' stroke='%232d4a3e' stroke-width='1.5' fill='none'/><circle cx='22' cy='22' r='4' fill='%232d4a3e'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inconsolata:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f4ef; --surface: #ffffff; --border: #ddd8d0;
+      --text: #1a1714; --text-mid: #5c564f; --text-dim: #9a9088;
+      --accent: #2d4a3e; --accent-soft: #e8f0ec;
+      --mono: 'Inconsolata', monospace; --serif: 'Cormorant Garamond', Georgia, serif;
+      --radius: 4px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px; line-height: 1.6; }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .back { font-size: 12px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; display: inline-block; margin-bottom: 2rem; }
+    .back:hover { color: var(--accent); }
+    h1 { font-family: var(--serif); font-size: 32px; font-weight: 300; color: var(--accent); margin-bottom: 0.5rem; }
+    .sub { font-size: 12px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 2.5rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+    .card-title { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+    td { padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: var(--text-mid); }
+    td:last-child { text-align: right; color: var(--text); }
+    .total-row td { font-weight: 500; color: var(--text); border-bottom: none; padding-top: 0.75rem; }
+    .surplus { color: #2d6a4f; }
+    .deficit { color: #8b1a1a; }
+    .note { font-size: 12px; color: var(--text-dim); margin-top: 1rem; line-height: 1.7; }
+    .principle { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 13px; color: var(--text-mid); }
+    .principle::before { content: '✦'; color: var(--accent); flex-shrink: 0; }
+    footer { margin-top: 3rem; font-size: 11px; color: var(--text-dim); text-align: center; letter-spacing: 0.08em; }
+    footer a { color: var(--text-dim); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/" class="back">← Back to Vitnas AI</a>
+  <h1>Transparency</h1>
+  <div class="sub">Monthly report · Updated manually · No automation · Last updated: May 2026</div>
+
+  <div class="card">
+    <div class="card-title">May 2026 — Financial Report</div>
+    <table>
+      <tr><th>Item</th><th>Type</th><th>Amount</th></tr>
+      <tr><td>Vercel hosting</td><td>Expense</td><td>$0.00</td></tr>
+      <tr><td>Supabase (free tier)</td><td>Expense</td><td>$0.00</td></tr>
+      <tr><td>Railway (backend)</td><td>Expense</td><td>$0.00</td></tr>
+      <tr><td>Domain (vitnas.org)</td><td>Expense</td><td>$1.20</td></tr>
+      <tr><td>Free tier AI calls (est.)</td><td>Expense</td><td>$0.00</td></tr>
+      <tr><td>Referral / donations</td><td>Income</td><td>$0.00</td></tr>
+      <tr class="total-row"><td colspan="2">Net this month</td><td class="deficit">−$1.20</td></tr>
+    </table>
+    <div class="note">This report is updated manually each month. All figures are approximate. The project is currently self-funded. No investors. No advertisers. No data sold.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Our Principles</div>
+    <div class="principle">No user data is stored without explicit consent.</div>
+    <div class="principle">API keys entered by users never leave their browser.</div>
+    <div class="principle">Free tier is funded by The Bridge Architect personally until sustainable.</div>
+    <div class="principle">If we ever take investment or advertising, it will be disclosed here first.</div>
+    <div class="principle">This report will always be public and updated monthly.</div>
+    <div class="principle">Code is open source. Audit it yourself.</div>
+  </div>
+
+  <footer>
+    <a href="/">Vitnas AI</a> · <a href="/api-key-guide">API Key Guide</a> · <a href="https://github.com/bigwiginfohub-wq/fidelity-framework" target="_blank">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>

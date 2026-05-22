@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>API Key Guide — Vitnas AI</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><rect x='6' y='6' width='32' height='32' rx='2' stroke='%232d4a3e' stroke-width='1.5' fill='none'/><circle cx='22' cy='22' r='4' fill='%232d4a3e'/></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inconsolata:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f4ef; --surface: #ffffff; --border: #ddd8d0; --border-dark: #b8b0a4;
+      --text: #1a1714; --text-mid: #5c564f; --text-dim: #9a9088;
+      --accent: #2d4a3e; --accent-soft: #e8f0ec; --green: #2d6a4f;
+      --mono: 'Inconsolata', monospace; --serif: 'Cormorant Garamond', Georgia, serif;
+      --radius: 4px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px; line-height: 1.6; }
+    .wrap { max-width: 700px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .back { font-size: 12px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; display: inline-block; margin-bottom: 2rem; }
+    .back:hover { color: var(--accent); }
+    h1 { font-family: var(--serif); font-size: 32px; font-weight: 300; color: var(--accent); margin-bottom: 0.5rem; }
+    .sub { font-size: 12px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 2.5rem; }
+    .explainer { background: var(--accent-soft); border: 1px solid #c8ddd4; border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+    .explainer p { font-size: 14px; color: var(--text-mid); line-height: 1.8; }
+    .explainer p + p { margin-top: 0.75rem; }
+    .provider { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+    .provider-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .provider-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--accent); }
+    .provider-model { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; }
+    .steps { list-style: none; counter-reset: step; }
+    .steps li { counter-increment: step; display: flex; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .steps li::before { content: counter(step); width: 22px; height: 22px; background: var(--bg); border: 1px solid var(--border-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+    .steps a { color: var(--accent); text-decoration: none; border-bottom: 1px solid #c8ddd4; }
+    .steps a:hover { border-color: var(--accent); }
+    .cost-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 2rem; }
+    .cost-table h2 { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); }
+    td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--border); color: var(--text-mid); }
+    .security-note { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; font-size: 13px; color: var(--text-mid); line-height: 1.8; }
+    .security-note strong { color: var(--accent); }
+    footer { margin-top: 3rem; font-size: 11px; color: var(--text-dim); text-align: center; letter-spacing: 0.08em; }
+    footer a { color: var(--text-dim); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/" class="back">← Back to Vitnas AI</a>
+  <h1>API Key Guide</h1>
+  <div class="sub">What is an API key, why you need one, and how to get it in 5 minutes.</div>
+
+  <div class="explainer">
+    <p><strong>What is an API key?</strong> It is a password that lets you call an AI model directly. When you use ChatGPT or Claude through their website, the company pays for every message. When you use your own API key, you pay directly — usually at a much lower cost.</p>
+    <p><strong>Why does Vitnas ask for it?</strong> Vitnas AI calls AI models on your behalf. We offer 10 free requests per day using our own key. For unlimited use, you bring your own key. Your key is stored only in your browser — Vitnas never sees it.</p>
+    <p><strong>How much does it cost?</strong> Very little. A typical conversation costs less than $0.01. See the table below.</p>
+  </div>
+
+  <div class="provider">
+    <div class="provider-hdr">
+      <div class="provider-name">Anthropic (Claude)</div>
+      <div class="provider-model">claude-sonnet-4, claude-opus-4</div>
+    </div>
+    <ol class="steps">
+      <li>Go to <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a></li>
+      <li>Sign up or log in</li>
+      <li>Click <strong>API Keys</strong> in the left sidebar</li>
+      <li>Click <strong>Create Key</strong> — give it a name like "Vitnas"</li>
+      <li>Copy the key — it starts with <code>sk-ant-</code></li>
+      <li>Add a payment method under <strong>Billing</strong> (no charge until you use it)</li>
+      <li>Paste the key into the Vitnas AI toolbar</li>
+    </ol>
+  </div>
+
+  <div class="provider">
+    <div class="provider-hdr">
+      <div class="provider-name">OpenAI (GPT)</div>
+      <div class="provider-model">gpt-4o, gpt-4o-mini</div>
+    </div>
+    <ol class="steps">
+      <li>Go to <a href="https://platform.openai.com" target="_blank" rel="noopener">platform.openai.com</a></li>
+      <li>Sign up or log in</li>
+      <li>Click your profile → <strong>API Keys</strong></li>
+      <li>Click <strong>Create new secret key</strong></li>
+      <li>Copy the key — it starts with <code>sk-</code></li>
+      <li>Add credits under <strong>Billing</strong></li>
+      <li>Paste the key into the Vitnas AI toolbar</li>
+    </ol>
+  </div>
+
+  <div class="provider">
+    <div class="provider-hdr">
+      <div class="provider-name">Google (Gemini)</div>
+      <div class="provider-model">gemini-1.5-flash (free tier available)</div>
+    </div>
+    <ol class="steps">
+      <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">aistudio.google.com/app/apikey</a></li>
+      <li>Sign in with your Google account</li>
+      <li>Click <strong>Create API Key</strong></li>
+      <li>Copy the key — it starts with <code>AIza</code></li>
+      <li>Gemini 1.5 Flash has a free tier — no billing required to start</li>
+      <li>Paste the key into the Vitnas AI toolbar</li>
+    </ol>
+  </div>
+
+  <div class="cost-table">
+    <h2>Cost Estimator</h2>
+    <table>
+      <tr><th>Model</th><th>Per 1K input tokens</th><th>Per 1K output tokens</th><th>~Cost per chat</th></tr>
+      <tr><td>Claude Sonnet 4</td><td>$0.003</td><td>$0.015</td><td>~$0.005</td></tr>
+      <tr><td>Claude Opus 4</td><td>$0.015</td><td>$0.075</td><td>~$0.02</td></tr>
+      <tr><td>GPT-4o</td><td>$0.0025</td><td>$0.010</td><td>~$0.004</td></tr>
+      <tr><td>GPT-4o mini</td><td>$0.00015</td><td>$0.0006</td><td>~$0.0003</td></tr>
+      <tr><td>Gemini 1.5 Flash</td><td>Free (up to limit)</td><td>Free (up to limit)</td><td>$0.00</td></tr>
+    </table>
+    <div style="font-size:11px;color:var(--text-dim);margin-top:0.75rem">Prices approximate as of May 2026. Check provider websites for current rates. 1 token ≈ 4 characters.</div>
+  </div>
+
+  <div class="security-note">
+    <strong>Your key stays in your browser.</strong> Vitnas stores your API key in localStorage on your device only. It is sent directly to the AI provider through our relay (to bypass CORS). Our relay does not log requests or store keys. You can verify this in our <a href="https://github.com/bigwiginfohub-wq/fidelity-framework" target="_blank" rel="noopener">open source code</a>.
+  </div>
+
+  <footer>
+    <a href="/">Vitnas AI</a> · <a href="/transparency">Transparency</a> · <a href="https://github.com/bigwiginfohub-wq/fidelity-framework" target="_blank">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
