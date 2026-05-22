@@ -122,7 +122,7 @@ async function callGemini(model, apiKey, system, messages, maxTokens) {
   const geminiModel = model.replace('gemini-', 'gemini-') ; // pass through
   const res = await httpsPost(
     'generativelanguage.googleapis.com',
-    '/v1beta/models/' + geminiModel + ':generateContent?key=' + apiKey,
+    '/v1/models/' + geminiModel + ':generateContent?key=' + apiKey,
     {},
     {
       contents,
@@ -185,7 +185,7 @@ module.exports = async function handler(req, res) {
 
   if (!key) {
     key = process.env.VITNAS_FREE_KEY || '';
-    resolvedModel = process.env.VITNAS_FREE_MODEL || 'gemini-1.5-flash';
+    resolvedModel = process.env.VITNAS_FREE_MODEL || 'gemini-1.5-flash-002';
     if (!key) {
       return jsonRes(res, 402, { error: 'No API key provided and no free key configured. Add your API key in the toolbar.' });
     }
