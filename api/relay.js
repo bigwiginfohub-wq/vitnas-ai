@@ -165,6 +165,48 @@ async function callGemini(model, apiKey, system, messages, maxTokens) {
 
   return { content: text };
 }
+async function callGroq(model, apiKey, system, messages, maxTokens) {
+  const groqMessages = [];
+  if (system) groqMessages.push({ role: 'system', content: system });
+  messages.forEach(function(m) {
+    groqMessages.push({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content });
+  });
+
+  let res;
+  try {
+    res = await httpsPost(
+      'api.groq.com',
+      '/openai/v1/chat/completions',
+      { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+      {
+        model: model,
+        messages: groqMessages,
+        max_tokens: maxTokens
+      }
+    );
+  } catch (e) {
+    return { error: 'Groq network error: ' + e.message };
+  }
+
+  console.log('Groq status:', res.status);
+
+  if (res.status !== 200) {
+    const msg = res.body && res.body.error && res.body.error.message
+      ? res.body.error.message
+      : 'Groq error ' + res.status;
+    return { error: msg };
+  }
+
+  const text = res.body && res.body.choices && res.body.choices[0] && res.body.choices[0].message && res.body.choices[0].message.content;
+
+  if (!text) {
+    console.error('Unexpected Groq structure:', JSON.stringify(res.body).slice(0, 300));
+    return { error: 'Unexpected response from Groq' };
+  }
+
+  return { content: text };
+}
+
 // ── Max tokens by verbosity ───────────────────────────────
 function maxTokens(verbosity) {
   if (verbosity === 1) return 300;
@@ -222,10 +264,12 @@ module.exports = async function handler(req, res) {
     } else if (resolvedModel.startsWith('gpt')) {
       result = await callOpenAI(resolvedModel, key, sys, messages, tokens);
     } else if (resolvedModel.startsWith('gemini')) {
-      result = await callGemini(resolvedModel, key, sys, messages, tokens);
-    } else {
-      result = { error: 'Unknown model: ' + resolvedModel };
-    }
+     result = await callGemini(resolvedModel, key, sys, messages, tokens);
+    } else if (resolvedModel.startsWith('llama') || resolvedModel.startsWith('mixtral') || resolvedModel.startsWith('gemma')) {
+   result = await callGroq(resolvedModel, key, sys, messages, tokens);
+ } else {
+  result = { error: 'Unknown model: ' + resolvedModel };
+}
   } catch (e) {
     result = { error: 'Provider call failed: ' + e.message };
   }
