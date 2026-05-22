@@ -14,7 +14,7 @@
 // ── Config ────────────────────────────────────────────────
 const CFG = {
   FREE_DAILY_LIMIT: 10,
-  FREE_MODEL: 'gemini-1.5-flash',
+  FREE_MODEL: 'gemini-1.5-flash-002',
   RELAY_URL: '/api/relay',
   DFBSS_URL: '/api/dfbss',
   SUPABASE_URL: 'https://ylgyycaiijdakoyahrms.supabase.co',

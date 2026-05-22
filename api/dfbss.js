@@ -91,7 +91,7 @@ module.exports = async function handler(req, res) {
   try { body = await readBody(req); }
   catch (e) { return jsonRes(res, 400, { error: 'Invalid request.' }); }
 
-  const model  = body.model || 'gemini-1.5-flash';
+  const model  = body.model || 'gemini-1.5-flash-002';
   const apiKey = body.apiKey || process.env.VITNAS_FREE_KEY || '';
 
   if (!apiKey) {
