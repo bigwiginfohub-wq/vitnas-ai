@@ -108,42 +108,63 @@ async function callOpenAI(model, apiKey, system, messages, maxTokens) {
 }
 
 async function callGemini(model, apiKey, system, messages, maxTokens) {
-  // Gemini uses a different message format
-  const contents = messages.map(function(m) {
-    return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] };
+  const contents = [];
+
+  if (system) {
+    contents.push({ role: 'user',  parts: [{ text: system }] });
+    contents.push({ role: 'model', parts: [{ text: 'Understood.' }] });
+  }
+
+  messages.forEach(function(m) {
+    contents.push({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    });
   });
 
-  // Prepend system as first user message if present
-  if (system) {
-    contents.unshift({ role: 'user', parts: [{ text: system }] });
-    contents.splice(1, 0, { role: 'model', parts: [{ text: 'Understood.' }] });
+  let res;
+  try {
+    res = await httpsPost(
+      'generativelanguage.googleapis.com',
+      '/v1/models/' + model + ':generateContent?key=' + apiKey,
+      {},
+      {
+        contents,
+        generationConfig: { maxOutputTokens: maxTokens }
+      }
+    );
+  } catch (e) {
+    return { error: 'Gemini network error: ' + e.message };
   }
 
-  const geminiModel = model.replace('gemini-', 'gemini-') ; // pass through
-  const res = await httpsPost(
-    'generativelanguage.googleapis.com',
-    '/v1/models/' + geminiModel + ':generateContent?key=' + apiKey,
-    {},
-    {
-      contents,
-      generationConfig: { maxOutputTokens: maxTokens }
-    }
-  );
+  // Log raw response for debugging
+  console.log('Gemini status:', res.status);
+  console.log('Gemini body:', JSON.stringify(res.body).slice(0, 300));
 
   if (res.status !== 200) {
-    return { error: 'Gemini error ' + res.status + ': ' + JSON.stringify(res.body) };
+    const msg = res.body && res.body.error && res.body.error.message
+      ? res.body.error.message
+      : 'Gemini error ' + res.status;
+    return { error: msg };
   }
 
-  const text = res.body.candidates &&
+  // Defensive extraction
+  const text =
+    res.body &&
+    res.body.candidates &&
     res.body.candidates[0] &&
     res.body.candidates[0].content &&
     res.body.candidates[0].content.parts &&
     res.body.candidates[0].content.parts[0] &&
     res.body.candidates[0].content.parts[0].text;
 
-  return { content: text || '' };
-}
+  if (!text) {
+    console.error('Unexpected Gemini structure:', JSON.stringify(res.body).slice(0, 300));
+    return { error: 'Unexpected response from Gemini. Check logs.' };
+  }
 
+  return { content: text };
+}
 // ── Max tokens by verbosity ───────────────────────────────
 function maxTokens(verbosity) {
   if (verbosity === 1) return 300;
