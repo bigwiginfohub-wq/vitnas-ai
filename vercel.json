@@ -1,17 +1,13 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/relay.js",  "use": "@vercel/node" },
-    { "src": "api/dfbss.js",  "use": "@vercel/node" },
-    { "src": "*.html",        "use": "@vercel/static" },
-    { "src": "*.css",         "use": "@vercel/static" },
-    { "src": "*.js",          "use": "@vercel/static" }
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/relay",        "dest": "/api/relay.js" },
-    { "src": "/api/dfbss",        "dest": "/api/dfbss.js" },
-    { "src": "/transparency",     "dest": "/transparency.html" },
-    { "src": "/api-key-guide",    "dest": "/api-key-guide.html" },
-    { "src": "/",                 "dest": "/index.html" }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
